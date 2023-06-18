@@ -4,7 +4,10 @@
             "name": "biriyani",
             "hotels": [
                 "galaxy",
-                "chembu"
+                "chembu",
+                "ifthar",
+                "sheba biriyani",
+                "awaany"
             ]
         },
         {
@@ -13,6 +16,33 @@
                 "galaxy",
                 "chembu"
             ]
-        }
+        },
+        {
+            "name": "fried_rice",
+            "hotels": [
+                "chiyang",
+                "chopstix",
+                "galaxy",
+                "chembu"
+            ]
+        },
+        {
+            "name": "shavarma",
+            "hotels": [
+                "al_taza",
+                "haji_ebrahim",
+                "pitaworks",
+                "shawarma_daddy"
+            ]
+        },
+        {
+            "name": "burger",
+            "hotels": [
+                "burger_spot",
+                "mc_donalds",
+                "kfc",     
+            ]
+        },
+        
     ]
 }
