@@ -1,48 +1,47 @@
 {
-    "items": [
-        {
-            "name": "biriyani",
-            "hotels": [
-                "galaxy",
-                "chembu",
-                "ifthar",
-                "sheba biriyani",
-                "awaany"
-            ]
-        },
-        {
-            "name": "kappa_biriyani",
-            "hotels": [
-                "galaxy",
-                "chembu"
-            ]
-        },
-        {
-            "name": "fried_rice",
-            "hotels": [
-                "chiyang",
-                "chopstix",
-                "galaxy",
-                "chembu"
-            ]
-        },
-        {
-            "name": "shavarma",
-            "hotels": [
-                "al_taza",
-                "haji_ebrahim",
-                "pitaworks",
-                "shawarma_daddy"
-            ]
-        },
-        {
-            "name": "burger",
-            "hotels": [
-                "burger_spot",
-                "mc_donalds",
-                "kfc",     
-            ]
-        },
-        
-    ]
+	"items": [{
+			"name": "biriyani",
+			"hotels": [
+				"galaxy",
+				"chembu",
+				"ifthar",
+				"sheba biriyani",
+				"awaany"
+			]
+		},
+		{
+			"name": "kappa_biriyani",
+			"hotels": [
+				"galaxy",
+				"chembu"
+			]
+		},
+		{
+			"name": "fried_rice",
+			"hotels": [
+				"chiyang",
+				"chopstix",
+				"galaxy",
+				"chembu"
+			]
+		},
+		{
+			"name": "shavarma",
+			"hotels": [
+				"al_taza",
+				"haji_ebrahim",
+				"pitaworks",
+				"shawarma_daddy"
+			]
+		},
+		{
+			"name": "burger",
+			"hotels": [
+				"burger_spot",
+				"mc_donalds",
+				"kfc"
+			]
+		}
+
+	]
 }
