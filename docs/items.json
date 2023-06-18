@@ -1,16 +1,18 @@
-[
-    {
-        "name": "biriyani",
-        "hotels": [
-            "galaxy",
-            "chembu"
-        ]
-    },
-    {
-        "name": "kappa_biriyani",
-        "hotels": [
-            "galaxy",
-            "chembu"
-        ]
-    }
-]
+{
+    "items": [
+        {
+            "name": "biriyani",
+            "hotels": [
+                "galaxy",
+                "chembu"
+            ]
+        },
+        {
+            "name": "kappa_biriyani",
+            "hotels": [
+                "galaxy",
+                "chembu"
+            ]
+        }
+    ]
+}
