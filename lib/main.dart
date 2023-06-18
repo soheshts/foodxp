@@ -1,8 +1,12 @@
-import 'dart:developer';
+import 'dart:convert';
+import 'dart:developer' as dev;
+import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_solidart/flutter_solidart.dart';
+//import 'package:flutter_solidart/flutter_solidart.dart';
 import 'package:http/http.dart' as http;
+
+import 'items.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,76 +39,87 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _counter = 0;
+  int index = 0;
+  int listLength = 1;
+  int hotelLength = 1;
+
+  late final Future<Items> futureItems;
 
   @override
   void initState() {
-    fetchList();
+    futureItems = fetchList();
   }
 
-  void fetchList() async {
-    var url = "https://soheshts.github.io/feeder/feeds.json";
-    var response = await http.get(Uri.parse(url));
-    log("feedsresponse: " + response.body.toString());
-  }
-
-  void _incrementCounter() {
+  void setRandom() {
+    index = Random().nextInt(listLength);
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      dev.log("length: " + listLength.toString());
     });
+  }
+
+  Future<Items> fetchList() async {
+    var url = "https://soheshts.github.io/foodxp/items.json";
+    var response = await http.get(Uri.parse(url));
+    dev.log("feedsresponse: " + response.body.toString());
+
+    if (response.statusCode == 200) {
+      return Items.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to load album');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            FutureBuilder<Items>(
+              future: futureItems,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  listLength = snapshot.data!.itemList!.length;
+                  hotelLength =
+                      snapshot.data!.itemList!.elementAt(index).hotels!.length;
+                  int hotelIndex = Random().nextInt(hotelLength);
+                  return Column(
+                    children: [
+                      Text(
+                          snapshot.data!.itemList!
+                              .elementAt(index)
+                              .name
+                              .toString(),
+                          style: TextStyle(fontSize: 35, color: Colors.amber)),
+                      Text(
+                          "from " +
+                              snapshot.data!.itemList!
+                                  .elementAt(index)
+                                  .hotels!
+                                  .elementAt(hotelIndex),
+                          style: TextStyle(fontSize: 25))
+                    ],
+                  );
+                } else if (snapshot.hasError) {
+                  return Text('${snapshot.error}');
+                }
+
+                // By default, show a loading spinner.
+                return const CircularProgressIndicator();
+              },
+            )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: setRandom,
         tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        child: const Icon(Icons.refresh),
+      ),
     );
   }
 }
